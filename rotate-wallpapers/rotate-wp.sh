@@ -17,8 +17,19 @@ LICENSE="MIT"
 
 # Thesse variabless are ignored if $CONF_FILE exists
 CONF_FILE='/etc/_script.conf'
-LOG_FILE='/tmp/_script.log'
+LOG_FILE='/home/chad/.log/rotate-wallpapers.log'
 
+DIR="/mnt/hdd_snapraid/Images/Wallpaper/1920x1200/"
+RECURSIVE=false
+MONITORS=(
+  "/backdrop/screen0/monitor0/workspace0/last-image"
+  "/backdrop/screen0/monitor1/workspace0/last-image"
+  "/backdrop/screen0/monitor2/workspace0/last-image")
+
+WAIT_UNTIL_IDLE=true
+IDLE_TIME=5
+SLEEP_TIME=20
+GET_IDLE="/home/chad/EncFS/Scripts/getIdle"
 
 #* ---------------------------------------|
 #*|  M A I N    F U N C T I O N S
@@ -27,7 +38,34 @@ LOG_FILE='/tmp/_script.log'
 main() {
   output "info" "Running Rotate Wallpapers"
 
+  PID=$(pgrep xfce4-session)
+  export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-)
+  output "debug" "Session ID identified: $DBUS_SESSION_BUS_ADDRESS"
 
+  if [ "$WAIT_UNTIL_IDLE" = true ]; then
+    output "debug" "Waiting until idle (sec): $IDLE_TIME , (ms): $(($IDLE_TIME * 1000 * 60))"
+    while true; do
+      idleTime=$($GET_IDLE)
+      output "trace" "Current Idle Time: $idleTime"
+      if [[ $idleTime -gt $(($IDLE_TIME * 1000 * 60)) ]] ; then
+      output "debug" "System Idle - $(timestamp)"
+        break;
+      fi
+      output "debug" "Sleeping $SLEEP_TIME waiting for idle - $(timestamp)"
+      sleep $SLEEP_TIME
+    done
+  fi
+
+  output "debug" "Changing Wallpapers"
+  for MONITOR in "${MONITORS[@]}"; do
+    if [ "$RECURSIVE" = true ]; then
+      WALLPAPER=$(find $DIR -type f | shuf -n1)
+    else
+      WALLPAPER=$(find $DIR -maxdepth 1 -type f | shuf -n1)
+    fi
+    /usr/bin/xfconf-query -c xfce4-desktop -p $MONITOR -s $WALLPAPER;
+    output "info" "Changing to: $WALLPAPER"
+  done
 }
 
 
@@ -303,9 +341,8 @@ version() {
 }
 
 
-
 #* ---------------------------------------|
-#*|  S T A R T    H E R E
+#*|  C L I    S E T T I N G S
 #*
 
 flag_conf="0"
@@ -329,10 +366,6 @@ while [ $# -gt 0  ]; do
     --quiet|-q) flag_quiet="1" ;;
     --conf=*) flag_conf="1"; CONF_ALT="$(echo "$1" | sed 's/--conf=//g')" ;;
     --cron|-c) flag_cron="1" ;;
-    --diff|-d) RUN_MAIN='1' ;;
-    --sync|-s) RUN_SYNC='1' ;;
-    --scrub|-b) RUN_SCRUB='1' ;;
-    --smart|-t) RUN_SMART="1" ;;
     *) _throw_error 2 ${1} ;;
   esac; shift
 done
@@ -341,29 +374,34 @@ output "debug" "Disabling verbosity if running as cronjob"
 [ "${flag_quiet}" = "1" ] && $( flag_v="0"; LOG_LEVEL="0" )
 [ "${flag_cron}" = "1" ] && OUT_V="0" || OUT_V="${flag_v}"
 
-output "info" "|  Launching \`srutils\`  -  $(timestamp)"
+
+#* ---------------------------------------|
+#*|  S T A R T    H E R E
+#*
+
+output "info" "|  Launching \`rotate-wp\`  -  $(timestamp)"
 
 output "debug" "Script Launched, ensuring no other copies are running"
-[ `ps aux | grep --count "[s]rutils"` -gt 2 ] && _throw_error 1
+[ `ps aux | grep --count "[r]otate-wp"` -gt 2 ] && _throw_error 1
 
-[ "$(id -u)" != '0' ] && _throw_error 0 "Script must be run as root user, exiting"
+#| Root not required
+#[ "$(id -u)" != '0' ] && _throw_error 0 "Script must be run as root user, exiting"
 
 output "debug" "Finished parsing options, continuing with script execution"
 
-[ -z $RUN_MAIN ] && [ -z $RUN_SYNC ] && [ -z $RUN_SCRUB ] && [ -z $RUN_SMART ] && \
-  _throw_error 0 "Please use flags to indicate what should be done  [-h for help]"
+#[ -z $RUN_MAIN ] && [ -z $RUN_SYNC ] && [ -z $RUN_SCRUB ] && [ -z $RUN_SMART ] && \
+#  _throw_error 0 "Please use flags to indicate what should be done  [-h for help]"
+
 if [ "${flag_conf}" = "1" ]; then
   CONF_FILE="${CONF_ALT}"
-else
-  CONF_FILE='/etc//send-archives.conf'
 fi
 
 output "debug" "Loading configuration file"
 [ -f $CONF_FILE ] && source $CONF_FILE
 
+#| Setup Logging Parameters
 LOG_FILE=${LOG_FILE:-"/var/log/snapraid.log"}
 [ "${flag_quiet}" = "1" ] && LOG_LEVEL="0" || LOG_LEVEL=${LOG_LEVEL:-"1"}
-
 logging "${LOG_LEVEL}"
 LOG_LEVEL="${?}"
 LOG_V="${LOG_LEVEL}"
@@ -371,8 +409,7 @@ output "debug" "Logging level: ${LOG_V}"
 
 output "debug" "Options configured -- Starting script execution"
 
-output "debug" "Starting snapraid_diff function, if enabled"
-[ -n "$RUN_MAIN" ] && main
+main
 
 output "debug" "Completed Passes"
 _summarize_run
