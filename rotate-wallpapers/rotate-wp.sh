@@ -4,6 +4,7 @@
 #| Script Information
 #|
 
+SCRIPT_NAME="Rotate Wallpapers"
 AUTHOR="Chad Sheets <chad@cjsheets.com>"
 GIT="https://github.com/cjsheets/Scripts"
 URL="http://cjsheets.com/Scripts"
@@ -18,6 +19,7 @@ LICENSE="MIT"
 # Thesse variabless are ignored if $CONF_FILE exists
 CONF_FILE='/etc/_script.conf'
 LOG_FILE='/home/chad/.log/rotate-wallpapers.log'
+LOG_LEVEL=3
 
 DIR="/mnt/hdd_snapraid/Images/Wallpaper/1920x1200/"
 RECURSIVE=false
@@ -36,10 +38,13 @@ GET_IDLE="/home/chad/EncFS/Scripts/getIdle"
 #*
 
 main() {
-  output "info" "Running Rotate Wallpapers"
+  output "info" "Entered main(), begining execution"
+  output "debug" "Determining session id"
+
 
   PID=$(pgrep xfce4-session)
-  export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-)
+  output "debug" "Determining session id"
+  DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-)
   output "debug" "Session ID identified: $DBUS_SESSION_BUS_ADDRESS"
 
   if [ "$WAIT_UNTIL_IDLE" = true ]; then
@@ -136,9 +141,9 @@ logging() {
     if [ ! -w "${LOG_FILE}" ]; then
       output "warn" "Cannot write to the log: "${LOG_FILE}". Check permissions. Logging is disabled."; return 0
   fi; fi; if [ "${_log_level}" != "0" ]; then
-    output "info" "Logging to: "${LOG_FILE}""
+    output "info" "Logging to: ${LOG_FILE}, level: ${_log_level}"
     echo "#* - - - - - - - - - - - - - - - - - - - - - - - -" >> ${LOG_FILE}
-    echo "#* [ $(timestamp) ] Starting send-archives" >> ${LOG_FILE}
+    echo "#* [ $(timestamp) ] Starting ${SCRIPT_NAME}" >> ${LOG_FILE}
     echo "#*" >> ${LOG_FILE}
     [ -z "${_log_level}" ] && return 1 || return "${_log_level}"
   else
@@ -353,7 +358,7 @@ flag_v="3"
 flag_quiet="0"
 
 OUT_V="${flag_v}"   # Output verbosity
-LOG_V="0"           # Log verbosity
+LOG_V="2"           # Log verbosity
 
 output "debug" "Parsing command line options"
 while [ $# -gt 0  ]; do
@@ -379,7 +384,7 @@ output "debug" "Disabling verbosity if running as cronjob"
 #*|  S T A R T    H E R E
 #*
 
-output "info" "|  Launching \`rotate-wp\`  -  $(timestamp)"
+output "info" "|  Launching ${SCRIPT_NAME}  -  $(timestamp)"
 
 output "debug" "Script Launched, ensuring no other copies are running"
 [ `ps aux | grep --count "[r]otate-wp"` -gt 2 ] && _throw_error 1
@@ -400,7 +405,7 @@ output "debug" "Loading configuration file"
 [ -f $CONF_FILE ] && source $CONF_FILE
 
 #| Setup Logging Parameters
-LOG_FILE=${LOG_FILE:-"/var/log/snapraid.log"}
+LOG_FILE=${LOG_FILE:-"/var/log/syslog"}
 [ "${flag_quiet}" = "1" ] && LOG_LEVEL="0" || LOG_LEVEL=${LOG_LEVEL:-"1"}
 logging "${LOG_LEVEL}"
 LOG_LEVEL="${?}"

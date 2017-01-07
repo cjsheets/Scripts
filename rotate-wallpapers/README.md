@@ -39,6 +39,6 @@ One technique for determining the correct path is to run the following command t
 
 This script is intended to run with user permissions. I recommend setting `SHELL=/bin/bash` at the top of your users crontab entry (`crontab -u cjsheets -e`).
 
-I rotate wallappers every 6 hours.
+I rotate wallpapers every 6 hours.
 
   0 */6 * * * /.../rotateWallpapers.sh
