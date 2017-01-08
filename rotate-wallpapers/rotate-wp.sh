@@ -29,7 +29,7 @@ MONITORS=(
   "/backdrop/screen0/monitor2/workspace0/last-image")
 
 WAIT_UNTIL_IDLE=true
-IDLE_TIME=5
+IDLE_TIME=0.1
 SLEEP_TIME=20
 GET_IDLE="/home/chad/EncFS/Scripts/getIdle"
 
@@ -48,11 +48,11 @@ main() {
   output "debug" "Session ID identified: $DBUS_SESSION_BUS_ADDRESS"
 
   if [ "$WAIT_UNTIL_IDLE" = true ]; then
-    output "debug" "Waiting until idle (sec): $IDLE_TIME , (ms): $(($IDLE_TIME * 1000 * 60))"
+    output "debug" "Waiting until idle (sec): $IDLE_TIME , (ms): $IDLE_TIME x 1000 x 60"
     while true; do
       idleTime=$($GET_IDLE)
       output "trace" "Current Idle Time: $idleTime"
-      if [[ $idleTime -gt $(($IDLE_TIME * 1000 * 60)) ]] ; then
+      if [[ $idleTime -gt $( printf %0.f $(echo "$IDLE_TIME * 1000  * 60" | bc -l)) ]] ; then
       output "debug" "System Idle - $(timestamp)"
         break;
       fi
