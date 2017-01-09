@@ -47,6 +47,9 @@ main() {
   DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-)
   output "debug" "Session ID identified: $DBUS_SESSION_BUS_ADDRESS"
 
+  output "debug" "Exporting display to talk to X11"
+  export DISPLAY=:0.0
+
   if [ "$WAIT_UNTIL_IDLE" = true ]; then
     output "debug" "Waiting until idle (sec): $IDLE_TIME , (ms): $IDLE_TIME x 1000 x 60"
     while true; do

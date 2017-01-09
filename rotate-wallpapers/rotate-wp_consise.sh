@@ -17,11 +17,12 @@ GET_IDLE="/home/chad/EncFS/Scripts/getIdle"
 
 PID=$(pgrep xfce4-session)
 export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-)
+export DISPLAY=:0.0
 
 if [ "$WAIT_UNTIL_IDLE" = true ]; then
   while true; do
     idleTime=$($GET_IDLE)
-    if [[ $idleTime -gt $(($IDLE_TIME * 1000 * 60)) ]] ; then
+    if [[ $idleTime -gt $( printf %0.f $(echo "$IDLE_TIME * 1000  * 60" | bc -l)) ]] ; then
       break;
     fi
     sleep $SLEEP_TIME
