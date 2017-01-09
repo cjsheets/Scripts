@@ -42,13 +42,12 @@ main() {
   output "debug" "Determining session id"
 
 
-  PID=$(pgrep xfce4-session)
-  output "debug" "Determining session id"
-  DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-)
-  output "debug" "Session ID identified: $DBUS_SESSION_BUS_ADDRESS"
-
-  output "debug" "Exporting display to talk to X11"
+  PID=$(ps -C xfce4-session -o pid=)
+  #Hack to remove the leading space. Maybe not so nice, but it works.
+  PID=$(echo $PID)
+  export $(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ)
   export DISPLAY=:0.0
+  output "debug" "Session Bus Address: $DBUS_SESSION_BUS_ADDRESS"
 
   if [ "$WAIT_UNTIL_IDLE" = true ]; then
     output "debug" "Waiting until idle (sec): $IDLE_TIME , (ms): $IDLE_TIME x 1000 x 60"
@@ -71,7 +70,8 @@ main() {
     else
       WALLPAPER=$(find $DIR -maxdepth 1 -type f | shuf -n1)
     fi
-    /usr/bin/xfconf-query -c xfce4-desktop -p $MONITOR -s $WALLPAPER;
+    xfconf-query -c xfce4-desktop -p $MONITOR -s ""
+    xfconf-query -c xfce4-desktop -p $MONITOR -s $WALLPAPER
     output "info" "Changing to: $WALLPAPER"
   done
 }

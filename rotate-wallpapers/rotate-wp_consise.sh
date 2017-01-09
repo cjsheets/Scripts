@@ -15,8 +15,10 @@ IDLE_TIME=5
 SLEEP_TIME=20
 GET_IDLE="/home/chad/EncFS/Scripts/getIdle"
 
-PID=$(pgrep xfce4-session)
-export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-)
+PID=$(ps -C xfce4-session -o pid=)
+#Hack to remove the leading space. Maybe not so nice, but it works.
+PID=$(echo $PID)
+export $(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ)
 export DISPLAY=:0.0
 
 if [ "$WAIT_UNTIL_IDLE" = true ]; then
@@ -35,5 +37,6 @@ for MONITOR in "${MONITORS[@]}"; do
   else
     WALLPAPER=$(find $DIR -maxdepth 1 -type f | shuf -n1)
   fi
-  /usr/bin/xfconf-query -c xfce4-desktop -p $MONITOR -s $WALLPAPER;
+  xfconf-query -c xfce4-desktop -p $MONITOR -s ""
+  xfconf-query -c xfce4-desktop -p $MONITOR -s $WALLPAPER
 done
