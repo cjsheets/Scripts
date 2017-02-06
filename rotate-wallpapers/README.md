@@ -42,3 +42,11 @@ This script is intended to run with user permissions. I recommend setting `SHELL
 I rotate wallpapers every 6 hours.
 
   0 */6 * * * /.../rotateWallpapers.sh
+
+
+## To-Do
+
+* Add duplicate detection
+* Add option to ensure selected image is new relative to the last -x- images selected 
+
+[![Analytics](https://cjs-beacon.appspot.com/UA-10006093-3/github/cjsheets/scripts/rotate-wallpapers?pixel)](https://github.com/cjsheets/scripts/rotate-wallpapers)

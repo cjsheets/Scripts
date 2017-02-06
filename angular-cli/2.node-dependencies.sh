@@ -1,0 +1,28 @@
+npm install --save connect-flash debug ejs express express-validator raven morgan body-parser cookie-parser express-session
+echo '|--- Sort the package.json'
+echo '|'
+echo '|'
+echo '|   "@angular/common": "^2.3.1"'
+echo '|   "@angular/compiler": "^2.3.1"'
+echo '|   "@angular/core": "^2.3.1"'
+echo '|   "@angular/forms": "^2.3.1"'
+echo '|   "@angular/http": "^2.3.1"'
+echo '|   "@angular/platform-browser": "^2.3.1"'
+echo '|   "@angular/platform-browser-dynamic": "^2.3.1"'
+echo '|   "@angular/router": "^3.3.1"'
+echo '|   "core-js": "^2.4.1"'
+echo '|   "raven-js": "^3.10.0"'
+echo '|   "rxjs": "^5.0.1"'
+echo '|   "ts-helpers": "^1.1.1"'
+echo '|   "zone.js": "^0.7.2"'
+echo '|  ......'
+echo '|'
+echo '|'
+echo '|--- And add to package.json:'
+echo '|'
+echo '"express-prod": "export NODE_ENV=production; node ./server/app",'
+echo '"express-dev": "node ./server/app",'
+echo '"proxy": "ng serve --proxy-config proxy.conf.json"'
+    
+printf "\nserver/config/environment/development.env.js" >> .gitignore
+printf "\n\n#Additional\nproxy.conf.json" >> .gitignore

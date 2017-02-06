@@ -29,7 +29,9 @@ MONITORS=(
   "/backdrop/screen0/monitor2/workspace0/last-image")
 
 WAIT_UNTIL_IDLE=true
-IDLE_TIME=0.1
+# In Minutes
+IDLE_TIME=10
+# In Seconds
 SLEEP_TIME=20
 GET_IDLE="/home/chad/EncFS/Scripts/getIdle"
 
