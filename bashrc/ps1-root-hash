@@ -1,0 +1,8 @@
+# Export PS1, if root change '$' to '#'
+if [ $(id -u) -eq 0 ]; then
+    export PS1="\h:\w\[\033[32m\]\$(parse_git_branch)\[\033[00m\]# "
+    # Also make the hash red
+    #export PS1="\h:\w\[\033[32m\]\$(parse_git_branch)\[\033[00m\]\e[31m#\e[0m "
+else
+    export PS1="\h:\w\[\033[32m\]\$(parse_git_branch)\[\033[00m\]$ "
+fi

@@ -1,0 +1,7 @@
+alias squeeze="twoLetterPath"
+twoLetterPath() {                                                                            
+    sps() {                                                                                              
+        python -c "import sys; dirs = sys.argv[1].split('/'); print '/'.join(d[:2] for d in dirs[:-1]) + '/' + dirs[-1]" $PWD
+    }
+    PS1='$(eval "sps")$ '
+}

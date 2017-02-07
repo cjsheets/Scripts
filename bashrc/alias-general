@@ -1,0 +1,10 @@
+alias c="clear"
+alias exit="clear; exit"
+alias gac='git add .; git status; read -rp "Enter a commit message:" commitMsg; git commit -m "$commitMsg"'
+alias gkill='kill -9 $(ps aux | grep "$1" | awk "{print $2}")'
+alias n2r="sudo /etc/init.d/nginx stop && sleep 2 && sudo /etc/init.d/nginx start"
+alias pong="ping -c 3 www.google.com"
+alias reboot="sudo shutdown -r now"
+alias snano="sudo nano"
+alias su-s="su -s /bin/bash"
+alias tail='tail -n 50'

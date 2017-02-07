@@ -1,0 +1,6 @@
+function decrypt() {
+        Source=$(echo "$1"|sed -e "s/.tar.gz.gpg//g")
+        gpg "$Source".tar.gz.gpg
+        tar -xzf "$Source".tar.gz
+        rm "$Source".tar.gz
+}

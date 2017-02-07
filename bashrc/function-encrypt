@@ -1,0 +1,6 @@
+function encrypt() {
+        Source=$(echo "$1"|sed -e "s/\///g")
+        $(tar -pczf "$Source".tar.gz "$Source")
+        gpg -c --cipher-algo=AES256 "$Source".tar.gz
+        rm "$Source".tar.gz
+}

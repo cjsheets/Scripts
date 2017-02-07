@@ -1,6 +1,6 @@
 # Shell Scripts
 
-This is a random assortment of scripts I use on a semi-regular basis. 
+This is a random assortment of scripts and configuration files I use on a semi-regular basis. 
 
 I'm working to become POSIX compliant, but am guilty of making use of BASH functions here and there.
 
