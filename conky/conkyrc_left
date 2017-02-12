@@ -1,0 +1,92 @@
+alignment top_left
+background yes
+border_width 1
+cpu_avg_samples 2
+default_color white
+default_outline_color white
+default_shade_color white
+double_buffer yes
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+gap_x 25
+gap_y 15 
+maximum_width 350
+max_port_monitor_connections 64
+max_specials 512
+max_user_text 16384
+minimum_size 330 10
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+wm_class_name Conky
+own_window_colour black
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_transparent yes
+own_window_type normal
+own_window yes
+stippled_borders 2
+update_interval 2
+uppercase no
+use_spacer yes
+use_xft yes
+xftalpha 0.8
+xftfont  input:size=9
+
+TEXT
+${color #0077ff}$nodename     ${alignc}$sysname $kernel ${alignr}$color${time %l:%M:%p}
+
+${color #0077ff}Uptime:$color $uptime ${color #0077ff} Load:$color $loadavg
+
+
+${color #0077ff}CPU:$color ${cpu}% ${color #0077ff}${cpubar 5,272}   
+${color #0077ff}${cpugraph 0 35,350 104E8B 0077ff} 
+
+${color #0077ff}Core:$color ${cpu cpu1}% ${goto 95}${color #0077ff}Core:$color ${cpu cpu2}%  ${goto 185}${color #0077ff}Core:$color ${cpu cpu3}%  ${goto 275}${color #0077ff}Core:$color ${cpu cpu4}%
+${color #0077ff}${cpubar cpu1 5,80 104E8B 0077ff} ${goto 95}${cpubar cpu2 5,80 104E8B 0077ff}  ${goto 185}${cpubar cpu3 5,80 104E8B 0077ff}  ${goto 275}${cpubar cpu4 5,80 104E8B 0077ff} 
+${color #0077ff}${cpugraph cpu1 35,80 104E8B 0077ff} ${goto 95}${cpugraph cpu2 35,80 104E8B 0077ff}  ${goto 185}${cpugraph cpu2 35,80 104E8B 0077ff}  ${goto 275}${cpugraph cpu3 35,80 104E8B 0077ff} 
+
+${color #0077ff}Core:$color ${cpu cpu5}% ${goto 95}${color #0077ff}Core:$color ${cpu cpu6}%  ${goto 185}${color #0077ff}Core:$color ${cpu cpu7}%  ${goto 275}${color #0077ff}Core:$color ${cpu cpu8}%
+${color #0077ff}${cpubar cpu5 5,80 104E8B 0077ff} ${goto 95}${cpubar cpu6 5,80 104E8B 0077ff}  ${goto 185}${cpubar cpu7 5,80 104E8B 0077ff}  ${goto 275}${cpubar cpu8 5,80 104E8B 0077ff} 
+${color #0077ff}${cpugraph cpu5 35,80 104E8B 0077ff} ${goto 95}${cpugraph cpu6 35,80 104E8B 0077ff}  ${goto 185}${cpugraph cpu7 35,80 104E8B 0077ff}  ${goto 275}${cpugraph cpu8 35,80 104E8B 0077ff} 
+
+${color #0077ff}CPU Use ${goto 190}PID ${goto 250}CPU% ${goto 310}MEM%
+$color ${top name 1} ${goto 180}${top pid 1} ${goto 240}${top cpu 1} ${goto 300}${top mem 1}
+$color ${top name 2} ${goto 180}${top pid 2} ${goto 240}${top cpu 2} ${goto 300}${top mem 2}
+$color ${top name 3} ${goto 180}${top pid 3} ${goto 240}${top cpu 3} ${goto 300}${top mem 3}
+$color ${top name 4} ${goto 180}${top pid 4} ${goto 240}${top cpu 4} ${goto 300}${top mem 4}
+$color ${top name 5} ${goto 180}${top pid 5} ${goto 240}${top cpu 5} ${goto 300}${top mem 5}
+$color ${top name 6} ${goto 180}${top pid 6} ${goto 240}${top cpu 6} ${goto 300}${top mem 6}
+$color ${top name 7} ${goto 180}${top pid 7} ${goto 240}${top cpu 7} ${goto 300}${top mem 7}
+$color ${top name 8} ${goto 180}${top pid 8} ${goto 240}${top cpu 8} ${goto 300}${top mem 8}
+
+
+${color #0077ff}RAM Usage:$color $mem${color #0077ff}/${color}$memmax - $memperc% ${color #0077ff}$membar
+${color #0077ff}${memgraph 35,350 104E8B 0077ff}
+
+${color #0077ff}Mem Use ${goto 190}PID ${goto 250}CPU% ${goto 310}MEM%
+$color ${top_mem name 1} ${goto 180}${top_mem pid 1} ${goto 240}${top_mem cpu 1} ${goto 300}${top_mem mem 1}
+$color ${top_mem name 2} ${goto 180}${top_mem pid 2} ${goto 240}${top_mem cpu 2} ${goto 300}${top_mem mem 2}
+$color ${top_mem name 3} ${goto 180}${top_mem pid 3} ${goto 240}${top_mem cpu 3} ${goto 300}${top_mem mem 3}
+$color ${top_mem name 4} ${goto 180}${top_mem pid 4} ${goto 240}${top_mem cpu 4} ${goto 300}${top_mem mem 4}
+$color ${top_mem name 5} ${goto 180}${top_mem pid 5} ${goto 240}${top_mem cpu 5} ${goto 300}${top_mem mem 5}
+$color ${top_mem name 6} ${goto 180}${top_mem pid 6} ${goto 240}${top_mem cpu 6} ${goto 300}${top_mem mem 6}
+$color ${top_mem name 7} ${goto 180}${top_mem pid 7} ${goto 240}${top_mem cpu 7} ${goto 300}${top_mem mem 7}
+$color ${top_mem name 8} ${goto 180}${top_mem pid 8} ${goto 240}${top_mem cpu 8} ${goto 300}${top_mem mem 8}
+
+
+${color #0077ff}Disk I/O: $color${diskio}
+${color #0077ff}${diskiograph 35,350 104E8B 0077ff 750}
+
+${color #0077ff}Swap Usage:$color $swap${color #0077ff}/${color}$swapmax - $swapperc% ${color #0077ff}${swapbar}
+${color #0077ff}Procs:$color $processes ${color #0077ff}Run:$color $running_processes ${color #0077ff}CPU:$color ${i2c 0-002d temp 2}${color #0077ff} MB:$color ${i2c 0-002d temp 1} ${color #0077ff}HD:$color ${execi 1 hddtemp /dev/sda | cut -c 24-30}
+${color #0077ff}Entropy: ${color}${entropy_avail}${color #0077ff}/${color}${entropy_poolsize} ${color #0077ff}${entropy_bar}
+
+${color #0077ff}File systems:
+ ${color #0077ff}/ ${goto 125}$color${fs_used /}/${fs_size /}${alignr}${color #0077ff}${fs_bar 5,85 /}
+ ${color #0077ff}/home ${goto 125}$color${fs_used /home}/${fs_size /home}${alignr}${color #0077ff}${fs_bar 5,85 /home}
+ ${color #0077ff}/usr/local ${goto 125}$color${fs_used /usr/local}/${fs_size /usr/local}${alignr}${color #0077ff}${fs_bar 5,85 /usr/local}
+ ${color #0077ff}/var ${goto 125}$color${fs_used /var}/${fs_size /var}${alignr}${color #0077ff}${fs_bar 5,85 /var}
+ ${color #0077ff}hdd_snapraid ${goto 125}$color${fs_used /mnt/hdd_snapraid}/${fs_size /mnt/hdd_snapraid}${alignr}${color #0077ff}${fs_bar 5,85 /mnt/hdd_snapraid}
+ ${color #0077ff}ssd_raid0 ${goto 125}$color${fs_used /mnt/ssd_raid0}/${fs_size /mnt/ssd_raid0}${alignr}${color #0077ff}${fs_bar 5,85 /mnt/ssd_raid0}

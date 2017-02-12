@@ -1,0 +1,39 @@
+alignment top_middle
+background yes
+border_width 1
+cpu_avg_samples 2
+default_color white
+default_outline_color white
+default_shade_color white
+double_buffer yes
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+extra_newline no
+gap_x 780
+gap_y 15
+max_specials 2048
+minimum_size 5 5
+net_avg_samples 2
+out_to_console no
+out_to_stderr no
+own_window yes
+own_window_class Conky
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_transparent yes
+own_window_type override
+pad_percents 0
+show_graph_range no
+show_graph_scale no
+stippled_borders 0
+text_buffer_size 16096
+update_interval 5
+uppercase no
+use_spacer none
+use_xft yes
+xftfont Liberation Mono:size=9
+
+
+TEXT
+${execpi 300 ~/.config/conky/gcalcli_agenda.sh}

@@ -6,6 +6,10 @@ This is a subset of the functions I use for my bashrc.
 * ps1-root-hash: change `$` to `#` when shell is root (like RHEL)
 * ps1-git: display git branch version when inside a repo
 
+### To-Do
+
+* Fix color in git after squeeze
+
 ### License
 
 MIT License
