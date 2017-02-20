@@ -1,3 +1,6 @@
+PS1_GREEN='\033[32m'
+PS1_RED='\033[31m'
+PS1_RESET='\033[00m'
 
 # If navigating in a git repo add branch decoration
 parse_git_branch() {
@@ -6,26 +9,20 @@ parse_git_branch() {
 
 # Export PS1, if root change '$' to '#'
 if [ $(id -u) -eq 0 ]; then
-    export PS1="\h:\w\[\033[32m\]\$(parse_git_branch)\[\033[00m\]# "
-    # Also make the hash red
-    #export PS1="\h:\w\[\033[32m\]\$(parse_git_branch)\[\033[00m\]\e[31m#\e[0m "
+    export PS1="\h:\w\[$PS1_GREEN\]\$(parse_git_branch)\[$PS1_RESET\]\[$PS1_RED\]#\[$PS1_RESET\] "
 else
-    export PS1="\h:\w\[\033[32m\]\$(parse_git_branch)\[\033[00m\]$ "
+    export PS1="\h:\w\[$PS1_GREEN\]\$(parse_git_branch)\[$PS1_RESET\]$ "
 fi
 
-alias squeeze="twoLetterPath"
-twoLetterPath() {
-    sps() {
-        python -c "import sys; dirs = sys.argv[1].split('/'); print '/'.join(d[:2] for d in dirs[:-1]) +$
+twoLetterPath() {                                                                            
+    sps() {                                                                                              
+        python -c "import sys; dirs = sys.argv[1].split('/'); print '/'.join(d[:2] for d in dirs[:-1]) + '/' + dirs[-1]" $PWD
     }
-    PS1="$(eval \"sps\")\[\033[00m\]\$(parse_git_branch)\[\033[00m\]$ "
+    if [ $(id -u) -eq 0 ]; then
+        export PS1="\$(eval 'sps')\[$PS1_GREEN\]\$(parse_git_branch)\[$PS1_RESET\]\[$PS1_RED\]#\[$PS1_RESET\] "
+    else
+        export PS1="\$(eval 'sps')\[$PS1_GREEN\]\$(parse_git_branch)\[$PS1_RESET\]$ "
+    fi
 }
 
-# If this is an xterm set the title to host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
+alias squeeze="twoLetterPath"

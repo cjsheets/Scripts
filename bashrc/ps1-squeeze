@@ -1,7 +1,11 @@
-alias squeeze="twoLetterPath"
+# Convert all but current directory in `pwd` to 2 letters (ex. /mn/po/ch/current-directory)
+
 twoLetterPath() {                                                                            
     sps() {                                                                                              
         python -c "import sys; dirs = sys.argv[1].split('/'); print '/'.join(d[:2] for d in dirs[:-1]) + '/' + dirs[-1]" $PWD
     }
-    PS1='$(eval "sps")$ '
+    export PS1="\$(eval 'sps')"
+
 }
+
+alias squeeze="twoLetterPath"
