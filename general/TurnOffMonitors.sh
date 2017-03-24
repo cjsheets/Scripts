@@ -1,0 +1,1 @@
+xfce4-terminal -H -e "xrandr --output DP-1 --off; xset dpms force off; read -n1; xrandr --output DP-1 --mode 1920x1200 --rate 59.88 --left-of DVI-I-1"
