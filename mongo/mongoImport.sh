@@ -1,7 +1,7 @@
 TODAY=$(date +%y%m%d)
 USER=xxxxx
 PASS=xxxxx
-URI=xxxxx.mlab.com:xxxxx
+URI=xxxxx.mlab.com:12345
 DB=xxxxx
 COLLECTIONS=("users" "settings")
 mkdir $TODAY
