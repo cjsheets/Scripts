@@ -1,0 +1,23 @@
+{
+	"auto_complete": false,
+	"auto_match_enabled": false,
+	"bold_folder_labels": false,
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+	"font_face": "Liberation Mono",
+	"font_size": 9,
+	"hot_exit": false,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"line_padding_bottom": 1,
+	"line_padding_top": 1,
+	"open_files_in_new_window": true,
+	"overlay_scroll_bars": "enabled",
+	"remember_open_files": false,
+	"spell_check": false,
+	"tab_size": 2,
+	"theme": "Piatto Dark.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"word_wrap": false
+}
