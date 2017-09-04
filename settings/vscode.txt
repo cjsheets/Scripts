@@ -1,11 +1,34 @@
 {
     "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "editor.minimap.enabled": false,
     "editor.tabSize": 2,
+    "editor.autoIndent": false,
     "python.formatting.provider": "yapf",
     "python.formatting.formatOnSave": true,
     "python.formatting.yapfArgs": ["--style","{based_on_style: chromium}"],
-//    "eslint.autoFixOnSave": true
     "files.exclude": {
         "**/*.pyc": true
-    }
+    },
+    "cSpell.enabledLanguageIds": [
+    "c",
+    "cpp",
+    "csharp",
+    "go",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "latex",
+    "markdown",
+    "php",
+    "plaintext",
+    "python",
+    "scss",
+    "text",
+    "typescriptreact",
+    "yml"
+  ],
+  "cSpell.words": [
+    "flexbox"
+  ]
 }
