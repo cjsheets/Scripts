@@ -2,7 +2,6 @@
   "editor.fontFamily": "'Consolas', 'Source Code Pro', 'Inconsolata', 'Liberation Mono'",
   "editor.fontSize": 12,
   "workbench.startupEditor": "none",
-  "workbench.startupEditor": "none",
   "git.confirmSync": false,
   "git.enableSmartCommit": true,
   "editor.minimap.enabled": false,
