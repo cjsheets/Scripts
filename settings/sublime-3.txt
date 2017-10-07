@@ -3,8 +3,9 @@
 	"auto_match_enabled": false,
 	"bold_folder_labels": false,
 	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
-	"font_face": "Liberation Mono",
-	"font_size": 9,
+	//"dpi_scale": 1.6,
+	"font_face": "Consolas",
+	"font_size": 10,
 	"hot_exit": false,
 	"ignored_packages":
 	[
@@ -17,7 +18,8 @@
 	"remember_open_files": false,
 	"spell_check": false,
 	"tab_size": 2,
-	"theme": "Piatto Dark.sublime-theme",
+	"theme": "Default.sublime-theme",
 	"translate_tabs_to_spaces": true,
+	"update_check": false,
 	"word_wrap": false
 }
