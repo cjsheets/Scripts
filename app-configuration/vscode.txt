@@ -8,7 +8,7 @@
   "editor.tabSize": 2,
   "editor.autoIndent": false,
   "python.formatting.provider": "yapf",
-  "python.formatting.formatOnSave": true,
+  "python.formatting.formatOnSave": false,
   "python.formatting.yapfArgs": ["--style","{based_on_style: chromium}"],
   "files.exclude": {
       "**/*.pyc": true
@@ -32,6 +32,9 @@
   "yml"
   ],
   "cSpell.words": [
-    "flexbox"
-  ]
+  "flexbox"
+  ],
+  "window.zoomLevel": 0,
+  "git.autofetch": true,
+  "git.decorations.enabled": false
 }
