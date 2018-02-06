@@ -1,2 +1,3 @@
 toolkit.cosmeticAnimations.enabled;false
 extensions.screenshots.disabled;true
+privacy.userContext.enabled;true
