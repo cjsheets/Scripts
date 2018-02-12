@@ -1,0 +1,38 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/*
+ *  Roomy Bookmarks Toolbar
+ */
+
+.bookmark-item > .toolbarbutton-text {
+margin-top: -1px !important;
+}
+.bookmark-item {
+margin: -1px !important;
+}
+
+.bookmark-item:not([container]):not([open="true"]) > .toolbarbutton-text {
+display: none !important;
+}
+
+#PlacesToolbarItems > .bookmark-item:not([container]):not([open="true"]) > .toolbarbutton-icon[label]:not([label=""]) {
+margin-inline-end: 0px !important;
+}
+
+/*
+ *  Mute the "active tab" indicator color
+ */
+
+.tab-line[selected="true"] {
+  background-color: #0d66bb !important;
+}
+
+/*
+ *  TSL icon shouldn't be an obnoxious lime-green
+ */
+
+#urlbar[pageproxystate="valid"] > #identity-box.verifiedDomain > #connection-icon,
+#urlbar[pageproxystate="valid"] > #identity-box.verifiedIdentity > #connection-icon,
+#urlbar[pageproxystate="valid"] > #identity-box.mixedActiveBlocked > #connection-icon {
+  fill: #0b8043 !important;
+}

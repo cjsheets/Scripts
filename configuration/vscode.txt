@@ -1,3 +1,4 @@
+{
   "editor.fontFamily": "'Consolas', 'Source Code Pro', 'Inconsolata', 'Liberation Mono'",
   "editor.fontSize": 12,
   "workbench.startupEditor": "none",
@@ -32,8 +33,5 @@
   ],
   "cSpell.words": [
     "flexbox"
-  ],
-  "git.autofetch": true,
-  "window.zoomLevel": 1,
-  "explorer.decorations.badges": false,
-  "explorer.decorations.colors": false
+  ]
+}
