@@ -36,3 +36,31 @@ margin-inline-end: 0px !important;
 #urlbar[pageproxystate="valid"] > #identity-box.mixedActiveBlocked > #connection-icon {
   fill: #0b8043 !important;
 }
+
+/*
+ *  Hide the tab loading animations (also, supposedly toolkit.cosmeticAnimations.enabled)
+ */
+
+.tab-throbber { display: none !important; }
+.tab-icon-image { visibility: show !important; display: block !important;}
+.tabbrowser-tab[progress="true"] .tab-icon-image {opacity:0.45; filter: blur(1px);}
+.tab-loading-burst[bursting]::before {
+background-image: none !important;
+} 
+
+/*
+ * https://www.reddit.com/r/firefox/comments/7dvtw0/guide_how_to_edit_your_context_menu/
+ */
+
+/*#context-navigation #support_lastpass_com_3,
+#context-navigation #screenshots_mozilla_org_create-screenshot,
+#context-navigation #ublock0_raymondhill_net_uBlock0-blockElement {
+dispaly: none !important;
+}
+*/
+
+menuitem[label="Take a Screenshot"],
+menuitem[label="LastPass"],
+menuitem[label="Block element"] {
+	display: none !important;
+}
