@@ -61,6 +61,7 @@ dispaly: none !important;
 
 menuitem[label="Take a Screenshot"],
 menuitem[label="LastPass"],
-menuitem[label="Block element"] {
+menuitem[label="Block element"],
+menuitem[label="Firefox Multi-Account Containers"] {
 	display: none !important;
 }
