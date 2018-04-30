@@ -1,8 +1,22 @@
-# Windows Setup Instructions
+Windows - New Machine Setup
+===========================
 
-Install standard packages
+* [Chrome](https://www.google.com/chrome/)
+* [Dropbox](https://www.dropbox.com/downloading)
+* [Fiddler](https://www.telerik.com/download/fiddler)
+* [GIMP](https://www.gimp.org/downloads/)
+* [Firefox](https://www.mozilla.org/en-US/firefox/new/)
+* [Git](https://git-scm.com/download/win)
+  * Explorer integration, nano
+* [NodeJS](https://nodejs.org/en/)
+* [Postman](https://www.getpostman.com/)
+* [Python](https://www.python.org/downloads/)
+* [Sublime](https://www.sublimetext.com/3)
+* [VSCode](https://code.visualstudio.com/download)
+* [Yarn](https://yarnpkg.com/en/docs/install#windows-stable)
 
-## SSH Key
+SSH Keys
+--------
 
 From git-bash:
 
@@ -10,10 +24,15 @@ From git-bash:
 * git config --global user.email
 * git config --global user.name
 
-## Admin Powershell
+Development Environment
+-----------------------
+
+From admin Powershell
 
 * npm install -g windows-build-tools
 
-## Packages
 
-* Python 2.7
+UI Configuration
+----------------
+
+**Taskbar:** small buttons
