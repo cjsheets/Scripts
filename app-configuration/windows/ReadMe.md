@@ -36,3 +36,12 @@ UI Configuration
 ----------------
 
 **Taskbar:** small buttons
+
+
+WSL (Subsystem for Linux)
+-------------------------
+
+```bash
+sudo apt-get update
+sudo apt-get install libpng-dev build-essential python
+```
